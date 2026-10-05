@@ -1,0 +1,323 @@
+[gd_scene format=3 uid="uid://bafck2q872cxp"]
+
+[ext_resource type="Script" uid="uid://ntgt3hretfga" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/tile_main_toolbar.gd" id="1_d0m3s"]
+[ext_resource type="LabelSettings" uid="uid://cjoqryljc6vi2" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/global_ui_label_settings.tres" id="LabelSettings_global"]
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_wg4s3"]
+
+[sub_resource type="DPITexture" id="DPITexture_jnkna"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m1 1v2h2v-2zm2 2v2h2v-2zm2 0h2v-2h-2zm2 0v2h2v-2zm2 0h2v-2h-2zm2 0v2h2v-2zm2 0h2v-2h-2zm0 2v2h2v-2zm0 2h-2v2h2zm0 2v2h2v-2zm0 2h-2v2h2zm0 2v2h2v-2zm-2 0h-2v2h2zm-2 0v-2h-2v2zm-2 0h-2v2h2zm-2 0v-2h-2v2zm-2 0h-2v2h2zm0-2v-2h-2v2zm0-2h2v-2h-2zm0-2v-2h-2v2zm2 0h2v-2h-2zm2 0v2h2v-2zm2 0h2v-2h-2zm0 2v2h2v-2zm-2 0h-2v2h2z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_6qpbo"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M1 1v2h2V1zm3 0v2h2V1zm3 0v2h2V1zm3 0v2h2V1zm3 0v2h2V1zM1 4v2h2V4zm3 0v2h2V4zm3 0v2h2V4zm3 0v2h2V4zm3 0v2h2V4zM1 7v2h2V7zm3 0v2h2V7zm5 1v7h5a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v4l-1-1-1 1V8zm-8 2v2h2v-2zm3 0v2h2v-2zm-3 3v2h2v-2zm3 0v2h2v-2z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_eibbo"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m7 1-.565 2.258a4.947 4.947 0 0 0-.689.28L3.758 2.343 2.344 3.758l1.195 1.994c-.112.221-.207.45-.285.685L1 7v2l2.258.564c.048.15.115.292.177.436H4c.54-.684 1.222-1.246 2-1.596a2.037 2.037 0 1 1 4 0A4.766 4.766 0 0 1 12 10h.58c.064-.145.132-.287.182-.438L15.014 9V7l-2.257-.565a4.992 4.992 0 0 0-.28-.687l1.194-1.99-1.414-1.414-1.994 1.195a5.012 5.012 0 0 0-.686-.285L9.016 1h-2zm1 6a1 1 0 0 0-1 1v2.174A3 3 0 0 0 5 13h1v2h1v-2h2v2h1v-2h1a3 3 0 0 0-2-2.826V7.998a1 1 0 0 0-1-1z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_iy1hc"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M12 14a2 2 0 0 0 2 2h1v-2h-.5a.5.5 0 0 1-.5-.5V8a6 6 0 1 0-2 4.465zM8 3a1 1 0 0 1 0 2 1 1 0 0 1 0-2zm3.441 2a1 1 0 0 1 0 2 1 1 0 0 1 0-2zM4.488 5a1 1 0 0 1 0 2 1 1 0 0 1 0-2zm.024 4a1 1 0 0 1 0 2 1 1 0 0 1 0-2zm6.904 0a1 1 0 0 1 0 2 1 1 0 0 1 0-2zM8 11a1 1 0 0 1 0 2 1 1 0 0 1 0-2z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_bcuhg"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"none\" stroke=\"#000\" stroke-linejoin=\"round\" stroke-opacity=\".8\" stroke-width=\"2\" d=\"m8 1 7 3v8l-7 3-7-3V4Z\"/><path fill-opacity=\".8\" d=\"M2 5h12v6l-12-.008Z\" paint-order=\"stroke fill markers\"/><path fill=\"#c2c2c2\" d=\"m8 7.5-7 3V12l7 3 7-3v-1.5z\"/><path fill=\"#d6d6d6\" d=\"m8 15-7-3v-1.5l7 3z\"/><path fill=\"#f9f9f9\" d=\"m1 10.5 7 3 7-3-7-3z\"/><path fill=\"#c2c2c2\" d=\"m8 4.25-7 3v1.5l7 3 7-3v-1.5z\"/><path fill=\"#d6d6d6\" d=\"m8 11.75-7-3v-1.5l7 3z\"/><path fill=\"#f9f9f9\" d=\"m1 7.25 7 3 7-3-7-3z\"/><path fill=\"#c2c2c2\" d=\"M8 1 1 4v1.5l7 3 7-3V4Z\"/><path fill=\"#f9f9f9\" d=\"m1 4 7 3 7-3-7-3z\"/><path fill=\"#d6d6d6\" d=\"m8 8.5-7-3V4l7 3z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_51uyt"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M4.73 2A2 2 0 1 0 2 4.73v6.541A2 2 0 1 0 4.73 14h6.541A2 2 0 1 0 14 11.27V4.729A2 2 0 1 0 11.27 2Zm.683 2h5.857a2 2 0 0 0 .729.73v5.856L5.412 4zM3.999 5.414 10.584 12H4.727a2 2 0 0 0-.729-.73V5.414z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_vx0uv"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M1 14a1 1 0 0 0 1 1h9.5a1 1 0 0 0 .707-.293l2.5-2.5A1 1 0 0 0 15 11.5V2a1 1 0 0 0-1-1H4.5a1 1 0 0 0-.707.293l-2.5 2.5A1 1 0 0 0 1 4.5zm1.25-9H11v7H2.25zm10 6V4.75L14 3v6.25zm-1-7.25h-8L5 2h8zM7.675 6l3 4-3 1-1.5-.5-1.75.75-1.75-.75L4.25 8l.875 1.25z\"/><path fill-opacity=\".4\" d=\"M7.675 6v5L6 10.5l-.875-1.25zM4.25 8v3.25L2.5 10.5\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_oc4f6"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M4 1 3 3l1 2v4H2v3.5a2.5 2.5 0 0 0 5 0V9H5V5l1-2-1-2zm6 .174a3 3 0 0 0 0 5.652V14a1 1 0 0 0 2 0V6.824a3 3 0 0 0 0-5.648V4a1 1 0 0 1-2 0z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d0m3s"]
+bg_color = Color(0.24115604, 0.24115607, 0.24115595, 1)
+border_color = Color(0.38170323, 0.3817033, 0.38170302, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+
+[node name="TileMapLayer3DTopBar" type="VBoxContainer" unique_id=125705029]
+offset_right = 64.0
+offset_bottom = 701.0
+size_flags_horizontal = 0
+size_flags_vertical = 3
+theme_override_constants/separation = -1
+script = ExtResource("1_d0m3s")
+
+[node name="EnableHBox" type="VBoxContainer" parent="." unique_id=1945568131]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = -8
+
+[node name="Label" type="Label" parent="EnableHBox" unique_id=14189899]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "On:"
+label_settings = ExtResource("LabelSettings_global")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnableTilingCheckBtn" type="CheckButton" parent="EnableHBox" unique_id=1293144657]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Enable this TileMapLayer3D node for Tiling Operations
+(select a TileMapLayer3D node first)"
+theme_override_constants/h_separation = -1
+alignment = 1
+text_overrun_behavior = 1
+clip_text = true
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=481760889]
+layout_mode = 2
+
+[node name="VFlowContainer" type="VFlowContainer" parent="." unique_id=537293499]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VFlowContainer" unique_id=693611045]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="ManualTileButton" type="Button" parent="VFlowContainer/VBoxContainer" unique_id=1715395185]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "MANUAL MODE: Switch to manual tile placement mode"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_jnkna")
+icon_alignment = 1
+
+[node name="AutoTileButton" type="Button" parent="VFlowContainer/VBoxContainer" unique_id=1171952374]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "AUTO_TILE MODE: Switch to auto tile placement mode"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_6qpbo")
+icon_alignment = 1
+
+[node name="SmartOperationsButton" type="Button" parent="VFlowContainer/VBoxContainer" unique_id=1388577821]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "SMART OPERATIONS: Switch to smart operations mode for Smart Select and Smart Fill options"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_eibbo")
+icon_alignment = 1
+
+[node name="AnimatedTilesButton" type="Button" parent="VFlowContainer/VBoxContainer" unique_id=1082731283]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "ANIMATED_TILES: Allow to create and place animated tiles (ALPHA FEATURE)"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_iy1hc")
+icon_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="VFlowContainer" unique_id=942842676]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="SculpTilesButton" type="Button" parent="VFlowContainer/VBoxContainer2" unique_id=375524537]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "SCULP MODE: Allow to craete shapes and forms with sculpting tools"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_bcuhg")
+icon_alignment = 1
+
+[node name="VertexEditButton" type="Button" parent="VFlowContainer/VBoxContainer2" unique_id=738291456]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "VERTEX EDIT MODE: Allow to convert Tiles with ability to update it's vertex position manually and create unique shapes"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_51uyt")
+icon_alignment = 1
+
+[node name="ScatterButton" type="Button" parent="VFlowContainer/VBoxContainer2" unique_id=2064653029]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "SCATTER ITEM MODE: Place objects to the scene using a object scatter approach"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_vx0uv")
+icon_alignment = 1
+
+[node name="SettingsButton" type="Button" parent="VFlowContainer/VBoxContainer2" unique_id=112521672]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 4
+tooltip_text = "SETTINGS: Switch to settings tab"
+theme_override_font_sizes/font_size = 20
+toggle_mode = true
+button_group = SubResource("ButtonGroup_wg4s3")
+icon = SubResource("DPITexture_oc4f6")
+icon_alignment = 1
+
+[node name="HSeparator2" type="HSeparator" parent="." unique_id=806041663]
+layout_mode = 2
+
+[node name="GridSettings" type="VBoxContainer" parent="." unique_id=1319225955]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_constants/separation = -1
+
+[node name="GridSnapLbl" type="Label" parent="GridSettings" unique_id=417332821]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "   Grid 
+   Snap:"
+label_settings = ExtResource("LabelSettings_global")
+horizontal_alignment = 1
+
+[node name="GridSnapDropdown" type="OptionButton" parent="GridSettings" unique_id=2090448025]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Minimum 0.25 (Quarter) due to coordinate system precision"
+theme_override_constants/outline_size = 1
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_d0m3s")
+theme_override_constants/arrow_margin = -1
+selected = 0
+fit_to_longest_item = false
+item_count = 3
+popup/item_0/text = "1.0"
+popup/item_0/id = 0
+popup/item_1/text = "0.5"
+popup/item_1/id = 1
+popup/item_2/text = "0.25"
+popup/item_2/id = 2
+
+[node name="CursorStepLbl" type="Label" parent="GridSettings" unique_id=2130792647]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "   Cursor
+   Step:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="CursorStepSizeDropdown" type="OptionButton" parent="GridSettings" unique_id=1376362239]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Minimum 0.25 (Quarter) due to coordinate system precision"
+theme_override_constants/outline_size = 1
+theme_override_constants/h_separation = 0
+theme_override_font_sizes/font_size = 16
+theme_override_styles/normal = SubResource("StyleBoxFlat_d0m3s")
+theme_override_constants/arrow_margin = -1
+selected = 2
+fit_to_longest_item = false
+item_count = 4
+popup/item_0/text = "0.25"
+popup/item_0/id = 0
+popup/item_1/text = "0.5"
+popup/item_1/id = 1
+popup/item_2/text = "1.0"
+popup/item_2/id = 2
+popup/item_3/text = "2.0"
+popup/item_3/id = 3
+
+[node name="HSeparator4" type="HSeparator" parent="GridSettings" unique_id=1894522553]
+layout_mode = 2

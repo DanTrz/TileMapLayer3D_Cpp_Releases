@@ -1,0 +1,29 @@
+[configuration]
+
+entry_symbol = "tilemaplayer3d_init"
+compatibility_minimum = "4.5"
+reloadable = true
+
+[libraries]
+
+windows.debug.x86_64 = "res://addons/tilemap_layer_3d_cpp/bin/tilemaplayer3d_cpp.windows.template_debug.x86_64.dll"
+
+windows.release.x86_64 = "res://addons/tilemap_layer_3d_cpp/bin/tilemaplayer3d_cpp.windows.template_release.x86_64.dll"
+
+web.debug.wasm32 = "res://addons/tilemap_layer_3d_cpp/bin/tilemaplayer3d_cpp.web.template_debug.wasm32.nothreads.wasm"
+
+web.release.wasm32 = "res://addons/tilemap_layer_3d_cpp/bin/tilemaplayer3d_cpp.web.template_release.wasm32.nothreads.wasm"
+
+linux.debug.x86_64 = "res://addons/tilemap_layer_3d_cpp/bin/libtilemaplayer3d_cpp.linux.template_debug.x86_64.so"
+
+
+linux.release.x86_64 = "res://addons/tilemap_layer_3d_cpp/bin/libtilemaplayer3d_cpp.linux.template_release.x86_64.so"
+
+
+macos.debug = "res://addons/tilemap_layer_3d_cpp/bin/libtilemaplayer3d_cpp.macos.template_debug.framework"
+
+macos.release = "res://addons/tilemap_layer_3d_cpp/bin/libtilemaplayer3d_cpp.macos.template_release.framework"
+
+
+[icons]
+TileMapLayer3d_Cpp = "res://addons/tilemap_layer_3d_cpp/src/icons/icon.png"

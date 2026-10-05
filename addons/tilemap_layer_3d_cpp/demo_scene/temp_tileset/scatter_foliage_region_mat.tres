@@ -1,0 +1,39 @@
+[gd_resource type="ShaderMaterial" script_class="TML3D_FoliageAtlasMaterial" format=3 uid="uid://c3126kscvak0s"]
+
+[ext_resource type="Script" uid="uid://b5l1jpkwsdktl" path="res://addons/tilemap_layer_3d_cpp/demo_scene/temp_tileset/foliage_atlas_material.gd" id="1_axop5"]
+[ext_resource type="Texture2D" uid="uid://cx4j7g2ipla75" path="res://addons/tilemap_layer_3d_cpp/demo_scene/temp_tileset/Demo_texture_v03.png" id="1_cjhl4"]
+[ext_resource type="Shader" uid="uid://it77fwuyhs3y" path="res://addons/tilemap_layer_3d_cpp/demo_scene/temp_tileset/FoliageAnimation_toon.gdshader" id="2_cjhl4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ybnu"]
+atlas = ExtResource("1_cjhl4")
+region = Rect2(288, 544, 32, 32)
+
+[resource]
+render_priority = 0
+shader = ExtResource("2_cjhl4")
+shader_parameter/albedo_tex = ExtResource("1_cjhl4")
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/use_vertex_color = false
+shader_parameter/vertex_color_is_srgb = false
+shader_parameter/roughness = 1.0
+shader_parameter/specular = 0.2
+shader_parameter/alpha_scissor_threshold = 0.5
+shader_parameter/use_albedo_region = true
+shader_parameter/albedo_region_px = Vector4(288, 544, 32, 32)
+shader_parameter/use_emission = true
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/emission_energy = 0.2999999932944
+shader_parameter/billboard = true
+shader_parameter/force_normals_up = true
+shader_parameter/whole_instance_shadows = false
+shader_parameter/wind_enabled = false
+shader_parameter/wind_sway_strength = 0.1
+shader_parameter/wind_sway_speed = 1.0
+shader_parameter/wind_time_scale = 1.0
+shader_parameter/wind_time_offset = 0.0
+shader_parameter/sway_variation = 0.35
+shader_parameter/sway_chance = 0.1
+shader_parameter/sway_from_bottom = true
+script = ExtResource("1_axop5")
+atlas_region = SubResource("AtlasTexture_6ybnu")
+metadata/_custom_type_script = "uid://b5l1jpkwsdktl"

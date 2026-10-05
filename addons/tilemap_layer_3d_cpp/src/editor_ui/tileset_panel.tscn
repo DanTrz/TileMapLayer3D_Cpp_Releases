@@ -1,0 +1,1073 @@
+[gd_scene format=3 uid="uid://cpjx8pfhotkwn"]
+
+[ext_resource type="Script" uid="uid://c8gm1yknyk3xg" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/tileset_panel.gd" id="1_x8k2j"]
+[ext_resource type="Script" uid="uid://ic3oggtdmjin" path="res://addons/tilemap_layer_3d_cpp/src/animated_tiles/animated_tile_manager.gd" id="2_rch2s"]
+[ext_resource type="PackedScene" uid="uid://ck5fookwnswk0" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/patterns_panel.tscn" id="3_uchas"]
+[ext_resource type="PackedScene" uid="uid://b23o1aukhfity" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/scatter_items_panel.tscn" id="4_scatter"]
+[ext_resource type="Script" uid="uid://dnwial53u47ti" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/texture_path_label.gd" id="5_1ivpf"]
+[ext_resource type="Script" uid="uid://bxeukytky5crs" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/tileset_display.gd" id="15_37ckb"]
+[ext_resource type="Script" uid="uid://cxiln3qn55xj1" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/autotile_tab.gd" id="autotile_tab"]
+[ext_resource type="LabelSettings" uid="uid://cjoqryljc6vi2" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/global_ui_label_settings.tres" id="LabelSettings_global"]
+
+[sub_resource type="DPITexture" id="DPITexture_cn756"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M2 1v14h8v-1H8v-4h2V8h4V6H9V1zm8 0v4h4z\"/><path fill=\"#5fff97\" d=\"M11 9v2H9v2h2v2h2v-2h2v-2h-2V9z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_vq1xx"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M1 1v2h2V1zm3 0v2h2V1zm3 0v2h2V1zm3 0v2h2V1zm3 0v2h2V1zM1 4v2h2V4zm3 0v2h2V4zm3 0v2h2V4zm3 0v2h2V4zm3 0v2h2V4zM1 7v2h2V7zm3 0v2h2V7zm5 1v7h5a1 1 0 0 0 1-1V9a1 1 0 0 0-1-1v4l-1-1-1 1V8zm-8 2v2h2v-2zm3 0v2h2v-2zm-3 3v2h2v-2zm3 0v2h2v-2z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_kj0f7"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M3 2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9c1.105 0 1.818-.91 2-2l1-6a1 1 0 0 0-1-1H6c-.552 0-.909.455-1 1l-1 6c-.091.545-.448 1-1 1a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1 1 1 0 0 0 1 1h5a1 1 0 0 0-1-1H7a2 2 0 0 0-2-2H3z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_ca0nr"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M3 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4l-3-3h-1v6H3zm1 0v5h3V1zm4 8a1 1 0 0 1 0 4 1 1 0 0 1 0-4z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_103as"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.39308548, 0.39308557, 0.39308518, 1)
+
+[sub_resource type="DPITexture" id="DPITexture_nf2r7"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m5 1v1h-4v2h14v-2h-4v-1zm-3 4v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-8zm1 2h2v6h-2zm4 0h2v6h-2zm4 0h2v6h-2z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1ivpf"]
+bg_color = Color(0.16484967, 0.20392194, 0.2824906, 0.79607844)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="DPITexture" id="DPITexture_nbxqa"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m7 1v6h-6v2h6v6h2v-6h6v-2h-6v-6z\"/></svg>
+"
+base_scale = 2.0
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ww8r3"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="TileSetPanel" type="PanelContainer" unique_id=993231083]
+custom_minimum_size = Vector2(0, 250)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x8k2j")
+
+[node name="TabContainer" type="TabContainer" parent="." unique_id=728904461]
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+current_tab = 0
+tabs_visible = false
+tab_1/hidden = true
+tab_2/hidden = true
+tab_3/hidden = true
+
+[node name="ManualTilingScrollTab" type="ScrollContainer" parent="TabContainer" unique_id=241791425]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="ManualTilingFlow" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab" unique_id=1881541314]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="TextureAndTileSettingsPanel" type="MarginContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow" unique_id=1341411830]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel" unique_id=940778390]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="ManualModeUI" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer" unique_id=1692372896]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TileSetEditingControls" type="GridContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualModeUI" unique_id=1480734341]
+layout_mode = 2
+columns = 2
+
+[node name="LoadTextureButton" type="Button" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualModeUI/TileSetEditingControls" unique_id=1273738050]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Loads a Texture (image) and creates the TileSet resource from a texture"
+theme_override_font_sizes/font_size = 20
+text = "Load Texture"
+icon = SubResource("DPITexture_cn756")
+
+[node name="OpenEditorButton" type="Button" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualModeUI/TileSetEditingControls" unique_id=2121063214]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Open Godot's native TileSet editor to configure terrains, custom data and other items"
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Tileset Editor"
+icon = SubResource("DPITexture_vq1xx")
+
+[node name="LoadTileSetButton" type="Button" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualModeUI/TileSetEditingControls" unique_id=479171269]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Load an existing TileSet resource"
+theme_override_font_sizes/font_size = 20
+text = "Load TileSet"
+icon = SubResource("DPITexture_kj0f7")
+
+[node name="SaveTileSetButton" type="Button" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualModeUI/TileSetEditingControls" unique_id=2014531903]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Save the TileSet to a loca resource file"
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Save TileSet"
+icon = SubResource("DPITexture_ca0nr")
+
+[node name="HSeparator3" type="HSeparator" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualModeUI" unique_id=1732563534]
+layout_mode = 2
+
+[node name="ManualTabCommonUI" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer" unique_id=1661072744]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TileSetZoomHBox" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI" unique_id=1045766164]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TileSetZoomHSlider" type="HSlider" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSetZoomHBox" unique_id=833722662]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+min_value = 0.05
+max_value = 4.0
+step = 0.05
+value = 1.0
+
+[node name="TileSizeBoxContainer" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI" unique_id=2127847775]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="TilePickerSizeLabel" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer" unique_id=2080434666]
+unique_name_in_owner = true
+layout_mode = 2
+text = "picker_tile_size "
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TilePickerSizeControls" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer" unique_id=1621908657]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TilePickerSizeX" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer/TilePickerSizeControls" unique_id=1849088730]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 8.0
+max_value = 2048.0
+value = 32.0
+alignment = 1
+suffix = "px"
+
+[node name="XLabel" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer/TilePickerSizeControls" unique_id=1443006976]
+layout_mode = 2
+text = "x"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TilePickerSizeY" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer/TilePickerSizeControls" unique_id=1958904835]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 8.0
+max_value = 2048.0
+value = 32.0
+alignment = 1
+suffix = "px"
+
+[node name="TileSetSizeLabel" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer" unique_id=2050732058]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Tile Set Size:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TileSetSizeControls" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer" unique_id=1079540030]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TileSetSizeX" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer/TileSetSizeControls" unique_id=692715560]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 8.0
+max_value = 2048.0
+value = 32.0
+alignment = 1
+suffix = "px"
+
+[node name="XLabel" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer/TileSetSizeControls" unique_id=1917778538]
+layout_mode = 2
+text = "x"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TileSetSizeY" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI/TileSizeBoxContainer/TileSetSizeControls" unique_id=1711157225]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+min_value = 8.0
+max_value = 2048.0
+value = 32.0
+alignment = 1
+suffix = "px"
+
+[node name="HSeparator2" type="HSeparator" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TextureAndTileSettingsPanel/VBoxContainer/ManualTabCommonUI" unique_id=449253335]
+layout_mode = 2
+
+[node name="AnimatedTileManager" type="PanelContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow" unique_id=1254565821]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_103as")
+script = ExtResource("2_rch2s")
+
+[node name="AnimatedTilesPanel" type="MarginContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager" unique_id=622763694]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel" unique_id=1788493717]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Label" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer" unique_id=292578316]
+layout_mode = 2
+text = "Alpha Feature: Animated Tiles"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="AnimatedTileParams" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer" unique_id=203044684]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams" unique_id=448159304]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Row" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer" unique_id=1054499497]
+layout_mode = 2
+text = "Row"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="AnimTileRow" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer" unique_id=378205434]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 50000.0
+value = 1.0
+alignment = 1
+
+[node name="Col" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer" unique_id=519398584]
+layout_mode = 2
+text = "Col"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="AnimTileCol" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer" unique_id=1472441891]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 255.0
+value = 1.0
+alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams" unique_id=562756695]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="Frames" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer2" unique_id=314176774]
+layout_mode = 2
+text = "Frames"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="AnimTileFrames" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer2" unique_id=145621802]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 255.0
+value = 1.0
+alignment = 1
+
+[node name="Speed" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer2" unique_id=1191425868]
+layout_mode = 2
+text = "Speed"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="AnimTileSpeed" type="SpinBox" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/HBoxContainer2" unique_id=1883243849]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+max_value = 255.0
+step = 0.01
+value = 1.0
+alignment = 1
+
+[node name="AnimTileButtons" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams" unique_id=980736602]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="CreateAnimTileButton" type="Button" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/AnimTileButtons" unique_id=1076084479]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Create a new TileSet resource"
+theme_override_font_sizes/font_size = 20
+text = "New"
+icon = SubResource("DPITexture_cn756")
+
+[node name="DeleteAnimTileButton" type="Button" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/AnimTileButtons" unique_id=632645845]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Remove the selected terrain"
+theme_override_font_sizes/font_size = 20
+text = "Delete"
+icon = SubResource("DPITexture_nf2r7")
+
+[node name="AnimTileDisplayName" type="LineEdit" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimatedTileParams/AnimTileButtons" unique_id=638351210]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+text = "AnimTile Name..."
+placeholder_text = "AnimTile name..."
+
+[node name="AnimTilesList" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer" unique_id=1778329332]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = -1
+
+[node name="AnimTileItemsList" type="ItemList" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/AnimatedTileManager/AnimatedTilesPanel/VBoxContainer/AnimTilesList" unique_id=1673578742]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 20
+allow_reselect = true
+allow_search = false
+same_column_width = true
+
+[node name="PatternsFillPanelMargin" type="MarginContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow" unique_id=1202501630]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = -2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="patterns_panel" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/PatternsFillPanelMargin" unique_id=1198286086 instance=ExtResource("3_uchas")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="TileSetSelectionPanel" type="MarginContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow" unique_id=722965344]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel" unique_id=1984350454]
+layout_mode = 2
+theme_override_constants/separation = -1
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer" unique_id=1551909634]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_103as")
+
+[node name="TileSetMainBoxContainer" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer" unique_id=1201353538]
+layout_mode = 2
+
+[node name="TileModeButtons" type="VBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer" unique_id=877598870]
+layout_mode = 2
+
+[node name="TileSelectModeOptions" type="HBoxContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer/TileModeButtons" unique_id=2095805382]
+visible = false
+layout_mode = 2
+
+[node name="TileUVSelectLabel" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer/TileModeButtons/TileSelectModeOptions" unique_id=573381326]
+layout_mode = 2
+text = "UV Mode"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TileUVModeDropdown" type="OptionButton" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer/TileModeButtons/TileSelectModeOptions" unique_id=295194550]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+item_count = 2
+popup/item_0/text = "TILES"
+popup/item_0/id = 0
+popup/item_1/text = "POINTS"
+popup/item_1/id = 1
+
+[node name="TileSetScrollContainer" type="ScrollContainer" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer" unique_id=1538188657]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="TilesetDisplay" type="TextureRect" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer/TileSetScrollContainer" unique_id=2082744157]
+unique_name_in_owner = true
+texture_filter = 1
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("15_37ckb")
+
+[node name="SelectionHighlight" type="ColorRect" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer/TileSetMainBoxContainer/TileSetScrollContainer/TilesetDisplay" unique_id=1971908734]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+mouse_filter = 2
+color = Color(1, 1, 0, 0.4)
+
+[node name="TexturePathLabel" type="Label" parent="TabContainer/ManualTilingScrollTab/ManualTilingFlow/TileSetSelectionPanel/VBoxContainer/PanelContainer" unique_id=466270311]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "No texture loaded"
+mouse_filter = 1
+theme_override_styles/normal = SubResource("StyleBoxFlat_1ivpf")
+text = "No texture loaded"
+label_settings = ExtResource("LabelSettings_global")
+text_overrun_behavior = 3
+script = ExtResource("5_1ivpf")
+
+[node name="Auto_Tiling" type="VBoxContainer" parent="TabContainer" unique_id=1702680662]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+script = ExtResource("autotile_tab")
+metadata/_tab_index = 1
+
+[node name="AutotileMargin" type="MarginContainer" parent="TabContainer/Auto_Tiling" unique_id=1081339407]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Auto_Tiling/AutotileMargin" unique_id=1866865267]
+layout_mode = 2
+
+[node name="AutoTileOptionsPanel" type="PanelContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer" unique_id=1284986520]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_103as")
+
+[node name="AutotileMainVBox" type="VBoxContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel" unique_id=343937810]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox" unique_id=1844629199]
+visible = false
+layout_mode = 2
+
+[node name="TileSetSectionLabel" type="Label" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/HBoxContainer" unique_id=933540219]
+unique_name_in_owner = true
+layout_mode = 2
+text = "TileSet Resource:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TileSetPathLabel" type="Label" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/HBoxContainer" unique_id=44143652]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "No TileSet loaded"
+label_settings = ExtResource("LabelSettings_global")
+text_overrun_behavior = 3
+
+[node name="OpenTilesetEditorButton" type="Button" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox" unique_id=2119239698]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Open Godot's native TileSet editor to configure terrains, custom data and other items"
+theme_override_font_sizes/font_size = 20
+text = "Tileset Editor"
+icon = SubResource("DPITexture_vq1xx")
+
+[node name="TerrainButtonsRow" type="HBoxContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox" unique_id=1135113925]
+layout_mode = 2
+
+[node name="AddTerrainButton" type="Button" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/TerrainButtonsRow" unique_id=2128161688]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Create a new terrain in this TileSet"
+theme_override_font_sizes/font_size = 20
+text = "Add Terrain"
+icon = SubResource("DPITexture_nbxqa")
+
+[node name="RemoveTerrainButton" type="Button" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/TerrainButtonsRow" unique_id=1602202246]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+tooltip_text = "Remove the selected terrain"
+theme_override_font_sizes/font_size = 20
+disabled = true
+text = "Remove"
+icon = SubResource("DPITexture_nf2r7")
+
+[node name="TerrainInputRow" type="HBoxContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/TerrainButtonsRow" unique_id=531228159]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TerrainNameInput" type="LineEdit" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/TerrainButtonsRow/TerrainInputRow" unique_id=1871461897]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 20
+placeholder_text = "Terrain name..."
+
+[node name="TerrainColorPicker" type="ColorPickerButton" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileOptionsPanel/AutotileMainVBox/TerrainButtonsRow/TerrainInputRow" unique_id=1948068806]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+tooltip_text = "Choose terrain color"
+color = Color(0.66903055, 0.3898629, 0.55028784, 1)
+
+[node name="AutoTileTerrainsPanel" type="PanelContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer" unique_id=1129972280]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_103as")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileTerrainsPanel" unique_id=241355537]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TerrainSectionLabel" type="Label" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileTerrainsPanel/VBoxContainer" unique_id=1714818280]
+layout_mode = 2
+text = "Select Terrain"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TerrainList" type="ItemList" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileTerrainsPanel/VBoxContainer" unique_id=350379817]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+allow_reselect = true
+max_columns = 6
+same_column_width = true
+
+[node name="StatusLabel" type="Label" parent="TabContainer/Auto_Tiling/AutotileMargin/HBoxContainer/AutoTileTerrainsPanel/VBoxContainer" unique_id=1963242042]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(0.7, 0.7, 0.7, 1)
+text = "Load a TileSet to begin"
+label_settings = ExtResource("LabelSettings_global")
+autowrap_mode = 2
+
+[node name="Scatter" type="MarginContainer" parent="TabContainer" unique_id=944451756]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+metadata/_tab_index = 2
+
+[node name="ScatterItemsPanel" parent="TabContainer/Scatter" unique_id=1056361903 instance=ExtResource("4_scatter")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="SettingsScrollTab" type="ScrollContainer" parent="TabContainer" unique_id=434290673]
+visible = false
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+metadata/_tab_index = 3
+
+[node name="Settings" type="FlowContainer" parent="TabContainer/SettingsScrollTab" unique_id=1585128123]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 250)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_constants/h_separation = 1
+theme_override_constants/v_separation = 1
+
+[node name="GridOptions" type="VBoxContainer" parent="TabContainer/SettingsScrollTab/Settings" unique_id=167185538]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="TabContainer/SettingsScrollTab/Settings/GridOptions" unique_id=954258093]
+layout_mode = 2
+text = "Grid and Tiles"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/SettingsScrollTab/Settings/GridOptions" unique_id=1963884677]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ww8r3")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer" unique_id=1260397844]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="FlowContainer" type="FlowContainer" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer" unique_id=2047422953]
+layout_mode = 2
+
+[node name="GridSizeControls" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer" unique_id=299334571]
+layout_mode = 2
+
+[node name="GridSizeLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer/GridSizeControls" unique_id=1630221455]
+layout_mode = 2
+text = "GridSize:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="GridSizeSpinBox" type="SpinBox" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer/GridSizeControls" unique_id=591523431]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 0.1
+max_value = 2.0
+step = 0.1
+value = 1.0
+
+[node name="ShowPlaneGridsCheckbox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer/GridSizeControls" unique_id=525217420]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "ShowGrid"
+
+[node name="CursorSpeedControls" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer" unique_id=1797409068]
+layout_mode = 2
+
+[node name="CursorSpeedLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer/CursorSpeedControls" unique_id=90784280]
+layout_mode = 2
+text = "Cursor Speed:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="CursorSpeedSpinBox" type="SpinBox" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer/CursorSpeedControls" unique_id=1742694434]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Base movement steps per second for W/A/S/D and Shift+W/S. A tap moves one Cursor Step; holding smoothly accelerates to 4x speed over two seconds. Saved in this layer's settings resource."
+min_value = 1.0
+max_value = 60.0
+value = 30.0
+
+[node name="ClearAllTilesButton" type="Button" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer" unique_id=1268356149]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Clear all tiles"
+
+[node name="EnabledArchedTilesCheckbox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer" unique_id=1586687733]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Enable Arch tiles
+(Experimental)"
+
+[node name="ShowArchedTilesOnManualCheckbox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/GridOptions/PanelContainer/MarginContainer/FlowContainer" unique_id=728848236]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Show Arch Tiles
+(Manual Mode)"
+
+[node name="CollisionControls" type="VBoxContainer" parent="TabContainer/SettingsScrollTab/Settings" unique_id=1678067069]
+layout_mode = 2
+
+[node name="CollisionLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls" unique_id=2105385467]
+layout_mode = 2
+text = "Collision:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls" unique_id=1514604281]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ww8r3")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer" unique_id=2022427134]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="HBoxContainer2" type="VBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer" unique_id=1738658346]
+layout_mode = 2
+
+[node name="CreateCollisionHboxCont" type="FlowContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2" unique_id=2025338087]
+layout_mode = 2
+
+[node name="CollisionGenHboxContainer" type="FlowContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont" unique_id=987983884]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CreateCollisionBtn" type="Button" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/CollisionGenHboxContainer" unique_id=1324366660]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Create Collision
+"
+
+[node name="SaveCollisionOptions" type="FlowContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont" unique_id=1320101048]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CollisionOptionsHboxCont" type="FlowContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions" unique_id=1266581533]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont" unique_id=193547988]
+layout_mode = 2
+
+[node name="CollisionAlphaLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont/HBoxContainer" unique_id=1007908883]
+layout_mode = 2
+text = "AlphaAware:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="CollisionAlphaCheckBox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont/HBoxContainer" unique_id=1816564819]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="VSeparator" type="VSeparator" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont" unique_id=445333900]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont" unique_id=1112486867]
+layout_mode = 2
+
+[node name="CollisionBackFaceLable" type="Label" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont/HBoxContainer2" unique_id=1065827541]
+layout_mode = 2
+text = "Backface Collision:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="BackfaceCollisionCheckBox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont/HBoxContainer2" unique_id=778539560]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="SaveExternal" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont" unique_id=1768804089]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SaveColliSionLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont/SaveExternal" unique_id=1776351227]
+layout_mode = 2
+text = "Save as external .res"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="SaveCollisionExternally" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/CreateCollisionHboxCont/SaveCollisionOptions/CollisionOptionsHboxCont/SaveExternal" unique_id=58830301]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2" unique_id=572179472]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ClearCollisionsButton" type="Button" parent="TabContainer/SettingsScrollTab/Settings/CollisionControls/PanelContainer/MarginContainer/HBoxContainer2/HBoxContainer2" unique_id=822618242]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Clear Collisions"
+
+[node name="ExportControls" type="VBoxContainer" parent="TabContainer/SettingsScrollTab/Settings" unique_id=749046214]
+layout_mode = 2
+
+[node name="Export Options" type="Label" parent="TabContainer/SettingsScrollTab/Settings/ExportControls" unique_id=1228569692]
+layout_mode = 2
+text = "Export/Bake:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls" unique_id=232224960]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ww8r3")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer" unique_id=2104785903]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="ExportButtonsGrid" type="FlowContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer" unique_id=847192697]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid" unique_id=21704558]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BakeMeshButton" type="Button" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/HBoxContainer" unique_id=1375126227]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+tooltip_text = "Bake to Scene and merge MultiMesh instances in a single ArrayMesh"
+text = "Bake Mesh to Scene
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid" unique_id=1910960317]
+layout_mode = 2
+
+[node name="AlphaAwareLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/HBoxContainer2" unique_id=1840050691]
+layout_mode = 2
+text = "AlphaAware:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="BakeAlphaCheckBox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/HBoxContainer2" unique_id=1603105409]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="BakeSpriteMeshes" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid" unique_id=1820461357]
+layout_mode = 2
+
+[node name="BakeSpriteMeshLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/BakeSpriteMeshes" unique_id=627193804]
+layout_mode = 2
+tooltip_text = "Bake Mesh to Scene also merges the visible SpriteMesh nodes that are direct children of this layer"
+mouse_filter = 1
+text = "SpriteMeshes:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="BakeSpriteMeshCheckBox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/BakeSpriteMeshes" unique_id=1147302965]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Bake Mesh to Scene also merges the visible SpriteMesh nodes that are direct children of this layer"
+
+[node name="SpriteMesh" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid" unique_id=1519793169]
+layout_mode = 2
+
+[node name="GenerateSpriteMeshButton" type="Button" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/SpriteMesh" unique_id=87703492]
+unique_name_in_owner = true
+layout_mode = 2
+layout_direction = 3
+tooltip_text = "Create a SpriteMesh object based on the selected tiles"
+text = "Create SpriteMesh"
+
+[node name="SpriteMeshDetph" type="Label" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/SpriteMesh" unique_id=1726706342]
+visible = false
+layout_mode = 2
+text = "Depth:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="SpriteMeshDepthSpinBox" type="SpinBox" parent="TabContainer/SettingsScrollTab/Settings/ExportControls/PanelContainer/MarginContainer/ExportButtonsGrid/SpriteMesh" unique_id=1149032560]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+min_value = 0.1
+max_value = 50.0
+step = 0.1
+value = 1.0
+
+[node name="OtherOptions" type="VBoxContainer" parent="TabContainer/SettingsScrollTab/Settings" unique_id=412133102]
+layout_mode = 2
+
+[node name="OtherOptions" type="Label" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions" unique_id=926692356]
+layout_mode = 2
+text = "Other options:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="PanelContainer" type="PanelContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions" unique_id=466175589]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_ww8r3")
+
+[node name="MarginContainer" type="MarginContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer" unique_id=959030947]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 2
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 2
+
+[node name="DebugButtonsGrid" type="VBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer" unique_id=297667784]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid" unique_id=1888499853]
+layout_mode = 2
+
+[node name="ShowDebugInfo" type="Button" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid/HBoxContainer" unique_id=699740075]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Show Debug Info
+"
+
+[node name="BoxZFightingCheckbox" type="CheckBox" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid" unique_id=1628625308]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "When enabled, BOX and PRISM tiles receive a tiny offset along their surface normal to prevent Z-fighting where their geometry overlaps"
+button_pressed = true
+text = "Auto Z-Fight Fix (Box/Prism)"
+
+[node name="TextureFilterControls" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid" unique_id=1111853607]
+layout_mode = 2
+
+[node name="TextureFilterLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid/TextureFilterControls" unique_id=1401040486]
+layout_mode = 2
+text = "Filter:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="TextureFilterDropdown" type="OptionButton" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid/TextureFilterControls" unique_id=1259020071]
+unique_name_in_owner = true
+layout_mode = 2
+selected = 0
+fit_to_longest_item = false
+item_count = 4
+popup/item_0/text = "Nearest"
+popup/item_0/id = 0
+popup/item_1/text = "Nearest Mipmap"
+popup/item_1/id = 1
+popup/item_2/text = "Linear"
+popup/item_2/id = 2
+popup/item_3/text = "Linear Mipmap"
+popup/item_3/id = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid" unique_id=1626492721]
+layout_mode = 2
+
+[node name="AlphaAwareLabel" type="Label" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid/HBoxContainer2" unique_id=713707432]
+layout_mode = 2
+text = "Pixel Inset:"
+label_settings = ExtResource("LabelSettings_global")
+
+[node name="PixelInsetSlider" type="HSlider" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid/HBoxContainer2" unique_id=412547016]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.25
+value = 0.5
+tick_count = 5
+ticks_on_borders = true
+
+[node name="LoadTextureDialog" type="FileDialog" parent="." unique_id=1045463458]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Open a File"
+initial_position = 2
+ok_button_text = "Open"
+file_mode = 0
+filters = PackedStringArray("*.png", "*.jpg", "*.jpeg")
+
+[node name="GridSizeConfirmDialog" type="ConfirmationDialog" parent="." unique_id=1799030617]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 2
+size = Vector2i(845, 184)
+ok_button_text = "Yes, Change Grid Size"
+dialog_text = "Changing grid size will rebuild all tiles at the new size.
+
+WARNING: This will clear all collision shapes. You'll need to regenerate collisions manually after the change.
+
+Continue?"
+
+[node name="TextureChangeWarningDialog" type="ConfirmationDialog" parent="." unique_id=793778959]
+unique_name_in_owner = true
+oversampling_override = 1.0
+title = "Clear Auto-Tile TileSet?"
+initial_position = 2
+size = Vector2i(435, 210)
+ok_button_text = "Continue"
+dialog_text = "Loading a new texture will clear your Auto-Tile TileSet.
+
+• Terrain configuration will be lost
+• Existing placed tiles remain but won't auto-update
+
+Continue?"

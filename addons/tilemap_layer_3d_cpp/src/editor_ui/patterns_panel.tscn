@@ -1,0 +1,87 @@
+[gd_scene format=3 uid="uid://ck5fookwnswk0"]
+
+[ext_resource type="Script" uid="uid://bhc02eshrcex5" path="res://addons/tilemap_layer_3d_cpp/src/editor_ui/patterns_panel.gd" id="1_sxf0l"]
+
+[sub_resource type="DPITexture" id="DPITexture_lorgd"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"M2 1v14h8v-1H8v-4h2V8h4V6H9V1zm8 0v4h4z\"/><path fill=\"#5fff97\" d=\"M11 9v2H9v2h2v2h2v-2h2v-2h-2V9z\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[sub_resource type="DPITexture" id="DPITexture_ah65p"]
+_source = "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\"><path fill=\"#e0e0e0\" d=\"m8 1a1 1 0 0 0 -1 1v5h-2c-1.108 0-2 .892-2 2v1h10v-1c0-1.108-.892-2-2-2h-2v-5a1 1 0 0 0 -1-1zm-5 10v4l10-1v-3z\"/></svg>
+"
+base_scale = 1.5
+saturation = 2.0
+color_map = {
+Color(1, 0.37254903, 0.37254903, 1): Color(1, 0.47, 0.42, 1),
+Color(0.37254903, 1, 0.5921569, 1): Color(0.45, 0.95, 0.5, 1),
+Color(1, 0.8666667, 0.39607844, 1): Color(0.83, 0.78, 0.62, 1)
+}
+
+[node name="patterns_panel" type="PanelContainer" unique_id=1715005983]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -448.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_sxf0l")
+
+[node name="MainVBox" type="VBoxContainer" parent="." unique_id=627701991]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MainVBox" unique_id=1588653867]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ButtonsGroup" type="VBoxContainer" parent="MainVBox/HBoxContainer" unique_id=1479945181]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 2
+
+[node name="AddPatternBtn" type="Button" parent="MainVBox/HBoxContainer/ButtonsGroup" unique_id=1259580404]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Add a new pattern to the list based on the current Selection"
+theme_override_font_sizes/font_size = 20
+text = "New"
+icon = SubResource("DPITexture_lorgd")
+
+[node name="ClearPatternSelectionBtn" type="Button" parent="MainVBox/HBoxContainer/ButtonsGroup" unique_id=332163411]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+tooltip_text = "Clear the item selection on the list"
+theme_override_font_sizes/font_size = 20
+text = "Clear"
+icon = SubResource("DPITexture_ah65p")
+
+[node name="CardScrollContainer" type="ScrollContainer" parent="MainVBox/HBoxContainer" unique_id=2018515242]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="CardsFlowContainer" type="HFlowContainer" parent="MainVBox/HBoxContainer/CardScrollContainer" unique_id=1275794313]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/h_separation = -1
+theme_override_constants/v_separation = -1
+
+[node name="TEMP_DEBUG_LBL" type="Label" parent="MainVBox" unique_id=740329247]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 8
