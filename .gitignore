@@ -1,3 +1,9 @@
+# Ignore everything except addons/tilemap_layer_3d_cpp/
+/*
+!/addons/
+/addons/*
+!/addons/tilemap_layer_3d_cpp/
+
 # Godot 4+ specific ignores
 .godot/
 .nomedia
