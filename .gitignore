@@ -2,7 +2,14 @@
 /*
 !/addons/
 /addons/*
-!/addons/tilemap_layer_3d_cpp/
+!/addons/tilemap_layer_3d_cpp/*
+
+# Release documentation (kept at the root so CI addon publishes never overwrite it)
+!/README.md
+!/HOW_TO_GUIDE.md
+!/SETTING_UP_AUTOTILE.md
+!/MIGRATION_GUIDE.md
+!/docs/
 
 # Godot 4+ specific ignores
 .godot/
@@ -23,3 +30,7 @@ mono_crash.*.json
 
 # Godot import metadata
 *.import
+*.png.import
+*.dll
+*.res
+*.tres
