@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Automatic source archives include only the addon folder.
+/* export-ignore
+/addons -export-ignore
