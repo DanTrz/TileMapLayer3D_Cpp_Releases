@@ -1009,7 +1009,7 @@ unique_name_in_owner = true
 layout_mode = 2
 selected = 0
 fit_to_longest_item = false
-item_count = 4
+item_count = 5
 popup/item_0/text = "Nearest"
 popup/item_0/id = 0
 popup/item_1/text = "Nearest Mipmap"
@@ -1018,6 +1018,8 @@ popup/item_2/text = "Linear"
 popup/item_2/id = 2
 popup/item_3/text = "Linear Mipmap"
 popup/item_3/id = 3
+popup/item_4/text = "Smooth Pixel"
+popup/item_4/id = 4
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="TabContainer/SettingsScrollTab/Settings/OtherOptions/PanelContainer/MarginContainer/DebugButtonsGrid" unique_id=1626492721]
 layout_mode = 2

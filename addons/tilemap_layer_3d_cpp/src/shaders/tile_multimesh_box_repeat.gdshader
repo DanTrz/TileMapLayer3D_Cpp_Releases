@@ -18,9 +18,8 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_toon, specular_
 
 uniform vec4 albedo_color : source_color = vec4(1.0);
 uniform float alpha_threshold = 0.5;
-uniform bool use_nearest_texture = true;
-uniform sampler2D albedo_texture_nearest : source_color, filter_nearest, repeat_disable;
-uniform sampler2D albedo_texture_linear : source_color, filter_linear, repeat_disable;
+uniform int filter_mode = 0;
+uniform sampler2D albedo_texture : source_color, filter_linear_mipmap, repeat_disable;
 uniform float inset_value = 0.5; // Inset in pixels to prevent texture bleeding
 // Side faces have a horizontal local normal (|n.y| < this); top/bottom/caps have |n.y| ~= 1.
 // Mirrors GlobalConstants.BOX_SIDE_NORMAL_Y_THRESHOLD.
@@ -35,6 +34,8 @@ varying flat vec4 anim_data;         // per-instance animation (front/back faces
 varying vec3 model_normal;          // local-space normal (pre-orientation) — side detection
 varying flat float inst_y_scale;    // recovered per-instance local-Y scale == depth_scale
 varying flat vec2 depth_seam;       // UV2: per axis, the UV at the top-face seam when it runs through the depth; -1 = none
+
+#include "res://addons/tilemap_layer_3d_cpp/src/shaders/tile_sampling.gdshaderinc"
 
 void decode_animation(vec4 data, out float total, out float cols, out float frame_index) {
 	if (data.b >= ANIM_PACKED_MARKER) {
@@ -57,13 +58,14 @@ void decode_animation(vec4 data, out float total, out float cols, out float fram
 	frame_index = min(floor(mod(TIME * speed, total) + 0.001), total - 1.0);
 }
 
-// Debug only: true when no sample on an 8x8 grid of the atlas cell is opaque. Explicit LOD because
+// Debug only: true when no sample on an 8x8 grid of the atlas cell is opaque. texelFetch because
 // it runs inside per-pixel control flow.
 bool is_cell_transparent(vec2 cell_min, vec2 cell_max) {
+	vec2 atlas_size = vec2(textureSize(albedo_texture, 0));
 	for (int y = 0; y < 8; y++) {
 		for (int x = 0; x < 8; x++) {
 			vec2 uv = mix(cell_min, cell_max, (vec2(float(x), float(y)) + 0.5) / 8.0);
-			if (textureLod(albedo_texture_nearest, uv, 0.0).a >= alpha_threshold) {
+			if (texelFetch(albedo_texture, ivec2(uv * atlas_size), 0).a >= alpha_threshold) {
 				return false;
 			}
 		}
@@ -108,8 +110,11 @@ void fragment() {
 	if (is_animated) {
 		float frame_step_x = anim_data.r;
 		float frame_step_y = anim_data.g;
-		float col = mod(frame_index, cols);
-		float row = floor(frame_index / cols);
+		// Integer math: float division may land just below a whole number on web GPUs (row 1 -> row 0).
+		int frame_i = int(frame_index);
+		int cols_i = int(cols);
+		float col = float(frame_i % cols_i);
+		float row = float(frame_i / cols_i);
 		vec2 offset = vec2(col * frame_step_x, row * frame_step_y);
 		uv_min += offset;
 		uv_max += offset;
@@ -140,21 +145,10 @@ void fragment() {
 
 	vec2 remapped_uv = mix(uv_min, uv_max, flipped_uv);
 
-	// Half-texel inset to prevent bleed/bilinear bleed at the atlas-cell edges.
-	vec2 texel_inset = inset_value / vec2(textureSize(albedo_texture_linear, 0));
-	vec2 final_uv = clamp(remapped_uv, uv_min + texel_inset, uv_max - texel_inset);
-
-	// Animated front/back faces: force mip 0 to prevent cross-frame mipmap bleeding.
-	vec4 tex_color;
-	if (is_animated) {
-		tex_color = use_nearest_texture
-			? textureLod(albedo_texture_nearest, final_uv, 0.0)
-			: textureLod(albedo_texture_linear, final_uv, 0.0);
-	} else {
-		tex_color = use_nearest_texture
-			? texture(albedo_texture_nearest, final_uv)
-			: texture(albedo_texture_linear, final_uv);
-	}
+	vec2 atlas_size = vec2(textureSize(albedo_texture, 0));
+	vec2 texel = remapped_uv * atlas_size;
+	vec4 tex_color = sample_tile(albedo_texture, atlas_size, texel, dFdx(texel), dFdy(texel),
+			uv_min * atlas_size, uv_max * atlas_size, filter_mode, inset_value);
 
 	// discard must happen BEFORE any other assignments (keeps shadows correct).
 	if (tex_color.a < alpha_threshold) {

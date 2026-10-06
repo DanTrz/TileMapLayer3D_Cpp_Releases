@@ -1911,6 +1911,7 @@ func _on_grid_size_changed(new_size: float) -> void:
 		current_tile_map3d.apply_settings()
 		if not is_equal_approx(old_size, new_size):
 			current_tile_map3d.clear_collision_shapes()
+		_mark_scene_dirty()
 
 func _on_texture_filter_changed(filter_mode: int) -> void:
 	if placement_manager:
@@ -1918,10 +1919,12 @@ func _on_texture_filter_changed(filter_mode: int) -> void:
 	if tile_preview:
 		tile_preview.texture_filter_mode = filter_mode
 		tile_preview._update_preview_material()
+	_mark_scene_dirty()
 
 func _on_pixel_inset_changed(value: float) -> void:
 	if current_tile_map3d:
 		current_tile_map3d.set_pixel_inset(value)
+	_mark_scene_dirty()
 
 
 # --- Area Fill Operations ---

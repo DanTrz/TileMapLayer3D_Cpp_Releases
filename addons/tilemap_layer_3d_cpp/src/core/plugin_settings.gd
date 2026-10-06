@@ -38,7 +38,7 @@ extends Resource
 			default_grid_size = value
 			emit_changed()
 
-@export_enum("Nearest", "Nearest Mipmap", "Linear", "Linear Mipmap") var default_texture_filter: int = TML3D_GlobalConstants.DEFAULT_TEXTURE_FILTER:
+@export_enum("Nearest", "Nearest Mipmap", "Linear", "Linear Mipmap", "Smooth Pixel") var default_texture_filter: int = TML3D_GlobalConstants.DEFAULT_TEXTURE_FILTER:
 	set(value):
 		if default_texture_filter != value:
 			default_texture_filter = value

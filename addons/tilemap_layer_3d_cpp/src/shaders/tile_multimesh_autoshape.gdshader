@@ -3,9 +3,8 @@ render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_toon, specular_
 
 uniform vec4 albedo_color : source_color = vec4(1.0);
 uniform float alpha_threshold = 0.5;
-uniform bool use_nearest_texture = true;
-uniform sampler2D albedo_texture_nearest : source_color, filter_nearest, repeat_disable;
-uniform sampler2D albedo_texture_linear : source_color, filter_linear, repeat_disable;
+uniform int filter_mode = 0;
+uniform sampler2D albedo_texture : source_color, filter_linear_mipmap, repeat_disable;
 uniform float inset_value = 0.5;
 // Front/back faces (silhouette) have a vertical normal (|n.y| >= this); thin extrusion sides
 // have a horizontal normal. Animation is applied to front/back faces only.
@@ -17,6 +16,8 @@ const float ANIM_PACKED_MARKER = 262144.0;
 varying flat vec4 uv_rect_data;
 varying flat vec4 anim_data;
 varying vec3 model_normal;
+
+#include "res://addons/tilemap_layer_3d_cpp/src/shaders/tile_sampling.gdshaderinc"
 
 void decode_animation(vec4 data, out float total, out float cols, out float frame_index) {
 	if (data.b >= ANIM_PACKED_MARKER) {
@@ -37,22 +38,6 @@ void decode_animation(vec4 data, out float total, out float cols, out float fram
 	cols = max(floor(data.a), 1.0);
 	float speed = fract(data.a) * 256.0;
 	frame_index = min(floor(mod(TIME * speed, total) + 0.001), total - 1.0);
-}
-
-vec2 atlas_uv_from_local(vec2 local_uv, vec2 uv_min, vec2 uv_max, vec2 texel_inset) {
-	vec2 safe_local = clamp(local_uv, vec2(0.0), vec2(1.0));
-	return mix(uv_min + texel_inset, uv_max - texel_inset, safe_local);
-}
-
-vec4 sample_atlas(vec2 uv, bool force_mip0) {
-	if (force_mip0) {
-		return use_nearest_texture
-			? textureLod(albedo_texture_nearest, uv, 0.0)
-			: textureLod(albedo_texture_linear, uv, 0.0);
-	}
-	return use_nearest_texture
-		? texture(albedo_texture_nearest, uv)
-		: texture(albedo_texture_linear, uv);
 }
 
 void vertex() {
@@ -78,19 +63,26 @@ void fragment() {
 	if (is_animated) {
 		float frame_step_x = anim_data.r;
 		float frame_step_y = anim_data.g;
-		float col = mod(frame_index, cols);
-		float row = floor(frame_index / cols);
+		// Integer math: float division may land just below a whole number on web GPUs (row 1 -> row 0).
+		int frame_i = int(frame_index);
+		int cols_i = int(cols);
+		float col = float(frame_i % cols_i);
+		float row = float(frame_i / cols_i);
 		vec2 offset = vec2(col * frame_step_x, row * frame_step_y);
 		uv_min += offset;
 		uv_max += offset;
 	}
 
-	vec2 texel_inset = inset_value / vec2(textureSize(albedo_texture_linear, 0));
 	vec2 local_uv = vec2(UV.x, 1.0 - UV.y);
 	if (mirror_texture) {
 		local_uv.x = 1.0 - local_uv.x;
 	}
-	vec4 tex_color = sample_atlas(atlas_uv_from_local(local_uv, uv_min, uv_max, texel_inset), is_animated);
+	vec2 atlas_size = vec2(textureSize(albedo_texture, 0));
+	vec2 cell_min = uv_min * atlas_size;
+	vec2 cell_max = uv_max * atlas_size;
+	vec2 texel = mix(cell_min, cell_max, local_uv);
+	vec4 tex_color = sample_tile(albedo_texture, atlas_size, texel, dFdx(texel), dFdy(texel),
+			cell_min, cell_max, filter_mode, inset_value);
 
 	if (tex_color.a < alpha_threshold) {
 		discard;

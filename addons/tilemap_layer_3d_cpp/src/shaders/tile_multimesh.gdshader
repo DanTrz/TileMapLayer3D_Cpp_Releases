@@ -2,9 +2,8 @@ shader_type spatial;
 render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_toon, specular_toon;
 uniform vec4 albedo_color : source_color = vec4(1.0);
 uniform float alpha_threshold = 0.5;
-uniform bool use_nearest_texture = true;
-uniform sampler2D albedo_texture_nearest : source_color, filter_nearest, repeat_disable;
-uniform sampler2D albedo_texture_linear : source_color, filter_linear, repeat_disable;
+uniform int filter_mode = 0;
+uniform sampler2D albedo_texture : source_color, filter_linear_mipmap, repeat_disable;
 uniform bool debug_show_backfaces = true;
 uniform bool debug_show_transparent_tiles = false;
 uniform float debug_transparent_tolerance = 0.0;
@@ -15,6 +14,8 @@ const float ANIM_PACKED_MARKER = 262144.0;
 
 varying flat vec4 uv_rect_data;
 varying flat vec4 anim_data;
+
+#include "res://addons/tilemap_layer_3d_cpp/src/shaders/tile_sampling.gdshaderinc"
 
 void decode_animation(vec4 data, out float total, out float cols, out float frame_index) {
     if (data.b >= ANIM_PACKED_MARKER) {
@@ -40,7 +41,7 @@ void decode_animation(vec4 data, out float total, out float cols, out float fram
 // Debug only: true when the cell's opaque texels are at most debug_transparent_tolerance (0-1) of it.
 // Every texel is read; cells wider than 32 texels are strided to keep the scan bounded.
 bool is_cell_transparent(vec2 cell_min, vec2 cell_max) {
-    vec2 atlas_size = vec2(textureSize(albedo_texture_nearest, 0));
+    vec2 atlas_size = vec2(textureSize(albedo_texture, 0));
     ivec2 texel_min = ivec2(round(cell_min * atlas_size));
     ivec2 texel_max = ivec2(round(cell_max * atlas_size));
     ivec2 cell_size = max(texel_max - texel_min, ivec2(1));
@@ -50,7 +51,7 @@ bool is_cell_transparent(vec2 cell_min, vec2 cell_max) {
     int opaque = 0;
     for (int y = texel_min.y; y < texel_max.y; y += stride.y) {
         for (int x = texel_min.x; x < texel_max.x; x += stride.x) {
-            if (texelFetch(albedo_texture_nearest, ivec2(x, y), 0).a >= alpha_threshold) {
+            if (texelFetch(albedo_texture, ivec2(x, y), 0).a >= alpha_threshold) {
                 opaque++;
                 if (opaque > max_opaque) {
                     return false;
@@ -102,8 +103,11 @@ void fragment() {
         // Keeps the +0.001 bias (still needed to avoid rounding-down stutter).
         // Uses min() instead of a second mod() because mod() would wrap to frame 0
         // causing a visible flash, while clamping to last frame is imperceptible.
-        float col = mod(frame_index, cols);
-        float row = floor(frame_index / cols);
+        // Integer math: float division may land just below a whole number on web GPUs (row 1 -> row 0).
+        int frame_i = int(frame_index);
+        int cols_i = int(cols);
+        float col = float(frame_i % cols_i);
+        float row = float(frame_i / cols_i);
         // Offset tile's base UV to the current animation frame
         vec2 offset = vec2(col * frame_step_x, row * frame_step_y);
         uv_min += offset;
@@ -125,33 +129,10 @@ void fragment() {
 
     vec2 remapped_uv = mix(uv_min, uv_max, flipped_uv);
 
-    vec2 final_uv;
-    if (use_nearest_texture) {
-        // Nearest: no interpolation might not even need to apply a pixel inset
-        // final_uv = remapped_uv;
-
-        vec2 texel_inset = inset_value / vec2(textureSize(albedo_texture_linear, 0));
-        final_uv = clamp(remapped_uv, uv_min + texel_inset, uv_max - texel_inset);
-    } else {
-        // final_uv = remapped_uv; //
-
-        // Linear: half-texel inset to prevent bilinear bleed
-        vec2 texel_inset = inset_value / vec2(textureSize(albedo_texture_linear, 0));
-        final_uv = clamp(remapped_uv, uv_min + texel_inset, uv_max - texel_inset);
-    }
-
-    // Sample texture with correct filter mode (nearest or linear)
-    // Animated tiles: force mip level 0 to prevent cross-frame mipmap bleeding
-    vec4 tex_color;
-    if (anim_total > 1.0) {
-        tex_color = use_nearest_texture
-            ? textureLod(albedo_texture_nearest, final_uv, 0.0)
-            : textureLod(albedo_texture_linear, final_uv, 0.0);
-    } else {
-        tex_color = use_nearest_texture
-            ? texture(albedo_texture_nearest, final_uv)
-            : texture(albedo_texture_linear, final_uv);
-    }
+    vec2 atlas_size = vec2(textureSize(albedo_texture, 0));
+    vec2 texel = remapped_uv * atlas_size;
+    vec4 tex_color = sample_tile(albedo_texture, atlas_size, texel, dFdx(texel), dFdy(texel),
+            uv_min * atlas_size, uv_max * atlas_size, filter_mode, inset_value);
 
     if (tex_color.a < alpha_threshold) {
         if (!debug_show_transparent_tiles || !is_cell_transparent(uv_min, uv_max)) {

@@ -58,5 +58,6 @@ const TEXTURE_FILTER_OPTIONS: Array[String] = [
 	"Nearest",           # 0 - TEXTURE_FILTER_NEAREST
 	"Nearest Mipmap",    # 1 - TEXTURE_FILTER_NEAREST_WITH_MIPMAPS
 	"Linear",            # 2 - TEXTURE_FILTER_LINEAR
-	"Linear Mipmap"      # 3 - TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	"Linear Mipmap",     # 3 - TEXTURE_FILTER_LINEAR_WITH_MIPMAPS
+	"Smooth Pixel"       # 4 - anti-aliased point sampling (tile shaders only)
 ]
