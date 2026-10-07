@@ -284,7 +284,8 @@ func _get_action_handler(action: Action, camera: Camera3D) -> Callable:
 				return _plugin._on_smart_select_additive_toggled.bind(not _plugin.current_tile_map3d.settings.smart_select_additive)
 			return Callable()
 
-	if _plugin._is_autotile_mode() or _plugin._is_animated_tile_mode() or _plugin._is_vertex_edit_mode():
+	# if _plugin._is_autotile_mode() or _plugin._is_animated_tile_mode() or _plugin._is_vertex_edit_mode():
+	if _plugin._is_autotile_mode() or _plugin._is_vertex_edit_mode():
 		return Callable()
 	match action:
 		Action.ROTATE_LEFT:
