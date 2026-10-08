@@ -369,8 +369,8 @@ func update_pattern_preview(
 		_preview_indicators[i].visible = false
 
 ## Large-pattern fallback: shows the whole pattern as ONE pre-baked translucent mesh that follows the
-## cursor (O(1) per move). The manager supplies the offset in node-local units.
-func update_pattern_mesh_preview(mesh: Mesh, material: Material, local_offset: Vector3, show: bool = true) -> void:
+## cursor (O(1) per move). The manager supplies the node-local transform (pattern turn + stamp offset).
+func update_pattern_mesh_preview(mesh: Mesh, material: Material, local_transform: Transform3D, show: bool = true) -> void:
 	_hide_all_preview_instances()
 	if _preview_mesh:
 		_preview_mesh.visible = false
@@ -395,7 +395,7 @@ func update_pattern_mesh_preview(mesh: Mesh, material: Material, local_offset: V
 		_pattern_mesh_cached = mesh
 		_pattern_mesh_instance.mesh = mesh
 		_pattern_mesh_instance.material_override = _make_ghost_material(material)
-	_pattern_mesh_instance.position = local_offset
+	_pattern_mesh_instance.transform = local_transform
 	_pattern_mesh_instance.visible = true
 	_is_multi_preview_active = true
 

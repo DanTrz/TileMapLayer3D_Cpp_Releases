@@ -959,7 +959,7 @@ func _update_preview(camera: Camera3D, screen_pos: Vector2, force_update: bool =
 			current_tile_map3d.clear_highlights()
 			return
 		if preview.get("mesh") != null:
-			tile_preview.update_pattern_mesh_preview(preview.mesh, preview.material, preview.offset, true)
+			tile_preview.update_pattern_mesh_preview(preview.mesh, preview.material, preview.transform, true)
 		else:
 			tile_preview.update_pattern_preview(preview.tiles, placement_manager.get_tileset_texture(), true, preview.pool_limit)
 		current_tile_map3d.highlight_tiles(preview.highlight_keys)
