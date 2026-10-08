@@ -152,6 +152,16 @@ The C++ edition uses a new node type (`TileMapLayer3d_Cpp`) and its own data for
 ## Credits
 
 * **[SpriteMesh](https://github.com/98teg/SpriteMesh)** by [98teg](https://github.com/98teg): Godot plugin for creating 3D meshes from 2D sprites. MIT License.
+* **[multimesh-plus](https://github.com/gtibo/multimesh-plus)** by [gtibo](https://github.com/gtibo/multimesh-plus): Some of our Scatter Mode code is based on Tibo's MM+ Addon for Godot. MIT License. 
+*  [LoicOberle](https://github.com/LoicOberle): for supporting some issues with the Grid Coordinate and Grid Snapping
+*  [didier-v](https://github.com/didier-v): for supporting fix the Keyboard shortcuts for non-QWERTY
+
+
+https://github.com/gtibo/multimesh-plus
+* 
+
+
+
 
 ## 📄 License
 
