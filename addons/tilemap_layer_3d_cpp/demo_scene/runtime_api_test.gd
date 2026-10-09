@@ -1,5 +1,6 @@
 @tool
 extends Node3D
+class_name RuntimeAPITestNode
 
 @export var tile_map_3d: TileMapLayer3d_Cpp
 @export var player: TestPlayer

@@ -282,6 +282,7 @@ func _edit(object: Object) -> void:
 				current_tile_map3d.settings.texture_filter_mode = plugin_settings.default_texture_filter
 				current_tile_map3d.settings.enable_collision = plugin_settings.default_enable_collision
 				current_tile_map3d.settings.alpha_threshold = plugin_settings.default_alpha_threshold
+			_mark_scene_dirty()
 
 		_set_current_mesh_mode(current_tile_map3d.settings.mesh_mode)
 		_apply_autoshape_freeze_uv_rule(current_tile_map3d.settings.mesh_mode)
@@ -1911,7 +1912,6 @@ func _on_grid_size_changed(new_size: float) -> void:
 		current_tile_map3d.apply_settings()
 		if not is_equal_approx(old_size, new_size):
 			current_tile_map3d.clear_collision_shapes()
-		_mark_scene_dirty()
 
 func _on_texture_filter_changed(filter_mode: int) -> void:
 	if placement_manager:

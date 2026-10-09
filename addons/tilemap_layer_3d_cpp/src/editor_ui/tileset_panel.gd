@@ -969,6 +969,8 @@ func _on_grid_size_value_changed(new_value: float) -> void:
 func _on_grid_size_confirmed() -> void:
 	_save_ui_to_settings()
 	grid_size_changed.emit(_pending_grid_size)
+	# Marked here, not in the grid_size_changed handler: _load_settings_to_ui also emits it on every node selection.
+	EditorInterface.mark_scene_as_unsaved()
 	if grid_size_spinbox:
 		await get_tree().create_timer(0.5).timeout
 		grid_size_spinbox.editable = true
