@@ -1003,7 +1003,8 @@ func _get_crossed_stroke_cells(from_pos: Vector3, to_pos: Vector3) -> Array[Vect
 	if not current_tile_map3d or not current_tile_map3d.settings:
 		return result
 
-	var step: float = placement_manager.get_grid_size() * current_tile_map3d.settings.grid_snap_size
+	# Stroke positions are grid positions, so the step is the snap alone (grid units, any grid size).
+	var step: float = current_tile_map3d.settings.grid_snap_size
 	if step <= 0.0:
 		return result
 
@@ -1939,18 +1940,19 @@ func _complete_area_fill() -> void:
 	if selection.is_erase:
 		result = _set_area_erase_v2(selection.min_pos, selection.max_pos, selection.orientation)
 	else:
-		result = _set_area_fill_v2(selection.min_pos, selection.max_pos, selection.orientation)
+		result = _set_area_fill_v2(selection.min_pos, selection.max_pos, selection.orientation, selection.start_pos)
 	if result > 0:
 		_check_tile_count_warning()
 		_mark_scene_dirty()
 
-func _set_area_fill_v2(min_pos: Vector3, max_pos: Vector3, orientation: int) -> int:
+func _set_area_fill_v2(min_pos: Vector3, max_pos: Vector3, orientation: int, origin: Vector3) -> int:
 	if not placement_manager or not current_tile_map3d or _is_animated_tile_mode():
 		return -1
 	var autotile: bool = _is_autotile_mode()
 	if autotile and (not _autotile_extension or not _autotile_extension.is_ready()):
 		return 0
 	var uv_only: bool = _is_paint_uv_only()
+	var multi: bool = not autotile and _has_multi_tile_selection()
 
 	# UV-only repaints the tiles already there; a normal fill creates one per cell.
 	var tiles: Array[TML3D_PlacedTileInfo] = []
@@ -1968,13 +1970,20 @@ func _set_area_fill_v2(min_pos: Vector3, max_pos: Vector3, orientation: int) -> 
 		uv = _autotile_extension.get_autotile_uv(tiles[0].grid_position, orientation)
 	elif uv_only:
 		uv = selection_manager.get_first_tile() if selection_manager else Rect2()
-	if not uv.has_area():
+	if not uv.has_area() and not multi:
 		return 0
 	var binding: Array[Variant] = _resolve_autotile_binding(uv) if autotile else placement_manager.binding_for_uv_rect(uv)
 	var terrain_id: int = _get_autotile_terrain_id() if autotile else TML3D_GlobalConstants.AUTOTILE_NO_TERRAIN
+	var multi_uvs: Dictionary = _get_multi_tile_area_uvs(tiles, origin, orientation) if multi else {}
 
 	var changed: Array[TML3D_PlacedTileInfo] = []
 	for tile: TML3D_PlacedTileInfo in tiles:
+		if multi:
+			uv = multi_uvs[tile.tile_key]
+			# A gap in a non-rectangular selection.
+			if not uv.has_area():
+				continue
+			binding = placement_manager.binding_for_uv_rect(uv)
 		# A manual UV-only repaint skips tiles already showing this UV, unless they are autotile.
 		if uv_only and not autotile and tile.uv_rect == uv and tile.terrain_id < 0:
 			continue
@@ -1997,12 +2006,33 @@ func _set_area_fill_v2(min_pos: Vector3, max_pos: Vector3, orientation: int) -> 
 	return changed.size()
 
 ## Grid cells inside the area-fill rectangle, or empty when the area is too large.
+## Cells are one tile (1.0 grid unit) apart at any grid size.
 func _get_area_fill_positions(min_pos: Vector3, max_pos: Vector3, orientation: int) -> Array[Vector3]:
-	var positions: Array[Vector3] = TML3D_GlobalUtil.get_grid_positions_in_area_with_snap(min_pos, max_pos, orientation, placement_manager.get_grid_size())
+	var positions: Array[Vector3] = TML3D_GlobalUtil.get_grid_positions_in_area_with_snap(min_pos, max_pos, orientation, 1.0)
 	if positions.size() > TML3D_GlobalConstants.MAX_AREA_FILL_TILES:
 		push_error("Area fill: Area too large (%d tiles, max %d)" % [positions.size(), TML3D_GlobalConstants.MAX_AREA_FILL_TILES])
 		return []
 	return positions
+
+## UV per tile key when the multi-tile selection repeats from origin: the stamp a click there would place,
+## with each tile wrapped into it. Tilted tiles use their flat base plane, which is where the area lies.
+func _get_multi_tile_area_uvs(tiles: Array[TML3D_PlacedTileInfo], origin: Vector3, orientation: int) -> Dictionary:
+	var base: int = TML3D_GlobalUtil.get_base_tile_orientation(orientation)
+	# On the area lattice, so every tile is a whole number of cells from the stamp.
+	var template: TML3D_PlacedTileInfo = placement_manager.create_tile_from_current_settings(origin.round(), base)
+	var stamp: Dictionary = {}
+	var lo: Vector3 = Vector3.INF
+	var hi: Vector3 = -Vector3.INF
+	for cell: TML3D_PlacedTileInfo in placement_manager.get_multi_tile_selection(template):
+		stamp[cell.tile_key] = cell.uv_rect
+		lo = lo.min(cell.grid_position)
+		hi = hi.max(cell.grid_position)
+	var size: Vector3 = (hi - lo).round() + Vector3.ONE
+	var uvs: Dictionary = {}
+	for tile: TML3D_PlacedTileInfo in tiles:
+		var cell_pos: Vector3 = lo + (tile.grid_position - lo).round().posmodv(size)
+		uvs[tile.tile_key] = stamp.get(TML3D_GlobalUtil.make_tile_key(cell_pos, base), Rect2())
+	return uvs
 
 ## A UV change makes a tile static, matching TileMapLayer3d_Cpp::update_tile_uv.
 func _clear_tile_animation(tile: TML3D_PlacedTileInfo) -> void:

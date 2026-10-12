@@ -79,8 +79,8 @@ func update(camera: Camera3D, screen_pos: Vector2, cursor_3d: TML3D_TileCursor3D
 	highlight_requested.emit(_start_pos, result.grid_pos, _start_orientation, _is_erase_mode)
 
 
-## Completes the area selection. Returns {min_pos, max_pos, orientation, is_erase}, or {} when
-## there is nothing to apply. The caller performs the fill or erase.
+## Completes the area selection. Returns {min_pos, max_pos, orientation, is_erase, start_pos}, or {}
+## when there is nothing to apply. The caller performs the fill or erase.
 func complete() -> Dictionary:
 	if not is_selecting or not is_ready():
 		cancel()
@@ -104,7 +104,7 @@ func complete() -> Dictionary:
 
 	clear_highlights_requested.emit()
 	is_selecting = false
-	return {"min_pos": min_pos, "max_pos": max_pos, "orientation": orientation, "is_erase": _is_erase_mode}
+	return {"min_pos": min_pos, "max_pos": max_pos, "orientation": orientation, "is_erase": _is_erase_mode, "start_pos": _start_pos}
 
 
 func cancel() -> void:
