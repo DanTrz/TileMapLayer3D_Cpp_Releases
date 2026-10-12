@@ -169,6 +169,7 @@ Usually they should match. Keep them different only when you intentionally want 
 - A whole drag, from press to release, is **one undo step**.
 - Fast drags fill the cells you skipped over, so strokes have no holes.
 - Area fill has a safety limit of **10,000 tiles**, and is not available in Animated Tiles mode.
+- With a multi-tile selection, Shift + left drag repeats the whole selection across the area, starting from the cell where you began the drag. This also works with **UV Only**.
 - Middle mouse, the mouse wheel and Alt + click are left to Godot for camera navigation. Turn **On** off to use right-mouse freelook.
 - Placing a tile on a cell that already holds a tile with the same orientation replaces it.
 - A cell outside the supported coordinate range shows a red "blocked" highlight and nothing is placed.
@@ -485,15 +486,23 @@ Patterns is a reusable copy-and-stamp library for complete tile arrangements. A 
 1. Choose **PATTERNS** in the Smart Mode dropdown. The bottom panel shows the Patterns library.
 2. Select the tiles you want to reuse. Selection works exactly like Smart Select, including the select types and **Add** (`Z`) to build a selection over several clicks.
 3. Click **New** in the bottom panel to save the selection as a pattern. A card with a thumbnail appears.
-4. To place it, click the pattern card. A preview follows the mouse; left-click to stamp a copy. You can stamp as many copies as you like.
+4. To place it, click the pattern card. A preview follows the mouse; press `Q` / `E` to turn it, then left-click to stamp a copy. You can stamp as many copies as you like.
 5. Right-click, or click the selected card again, to stop placing.
 
-- The pattern's reference point is the tile nearest the centre of the saved selection.
+- The pattern's reference point is the tile nearest the centre of the saved selection. Regular grid tiles are preferred over ramp and stair pieces, so patterns that include them still line up with the grid.
 - Stamping replaces tiles that occupy the same cells and orientations. Each stamp is one undo step.
 - AutoTile tiles inside a pattern re-resolve to fit where they land.
 - Patterns are stored in the node's `tile_map_data`, so each node has its own library.
 - Creating and deleting patterns is not undoable.
-- Patterns are stamped exactly as saved; rotating a pattern is not supported yet.
+
+#### Rotating a pattern
+
+While placing a pattern, press `Q` / `E` to turn the whole pattern by 90°, and `T` to reset it. The pattern turns as one piece around the vertical axis, pivoting on its reference tile, and the preview shows the result. The rotate buttons in the context toolbar belong to Manual mode, so in Patterns mode use the keys.
+
+- Walls move to the matching wall, floors and ceilings spin in place, and ramp, stair and vertex-edited tiles turn with the rest. Textures turn with the pattern.
+- The rotation is the same one Manual mode uses, so a rotation you set there carries over. Selecting a tile in the texture preview resets it to 0°.
+- Only the stamped copy is turned; the saved pattern never changes.
+- If a turn cannot be represented on the grid (a tile has no matching grid orientation, or two tiles would land on the same cell), the pattern is placed unturned and a warning is printed to the Output panel.
 
 ## 9. Sculpt Mode
 
@@ -725,6 +734,8 @@ Every `TileMapLayer3d_Cpp` node exposes the API as:
 tile_map.runtime_api
 ```
 
+C# projects use the same API through a small wrapper. See [Using the Runtime API from C#](#using-the-runtime-api-from-c).
+
 ### How positions work
 
 - World-space positions select the **whole grid cell** that contains them, in the node's local space and using its `grid_size`. Moved, rotated and scaled nodes are handled.
@@ -896,6 +907,65 @@ The demo scene in `addons/tilemap_layer_3d_cpp/demo_scene/` contains working exa
 
 The full API reference is available in Godot's built-in help: search for `TML3D_RuntimeAPI`.
 
+### Using the Runtime API from C#
+
+Godot's C# can't see GDExtension classes directly, so the addon includes a thin C# wrapper in `addons/tilemap_layer_3d_cpp/csharp/` (namespace `TML3D`). It needs the .NET build of Godot. GDScript-only projects can ignore this folder: nothing in the addon references it.
+
+| File | What it gives you |
+| --- | --- |
+| `TileMapLayer3D.cs` | A script for the `TileMapLayer3d_Cpp` node that puts the Runtime API on the node as C# methods: `PlaceTile`, `EraseTile`, `PlaceArea`, `EraseArea`, `FindTile`, `GetFirstTileFromRaycast`, highlights, `SetCollisionForRegion` with `BakeCompleted` / `BakeFailed` events, texture swaps and animated-group playback. |
+| `PlacedTileInfo.cs` | A typed view of `TML3D_PlacedTileInfo`, with properties such as `TileKey`, `Orientation`, `MeshMode`, `UvRect` and `DepthScale`. |
+
+Set it up:
+
+1. Attach `addons/tilemap_layer_3d_cpp/csharp/TileMapLayer3D.cs` to your `TileMapLayer3d_Cpp` node. You do this once per node.
+2. In your own scripts, add an `[Export] TileMapLayer3D` property and assign the node to it. From code, `TileMapLayer3D.From(node)` wraps an existing node (attaching the script if needed), and `TileMapLayer3D.Instantiate()` creates a new node with the script attached.
+
+```csharp
+using Godot;
+using TML3D;
+
+public partial class Player : CharacterBody3D
+{
+    [Export] public TileMapLayer3D TileMap { get; set; } = null!;
+
+    public override void _Ready()
+    {
+        TileMap.BakeCompleted += (regionKey, requestId, result) => GD.Print($"Collision rebuilt for region {regionKey}");
+        TileMap.BakeFailed += (regionKey, requestId, reason) => GD.PushWarning($"Collision rebuild failed: {reason}");
+    }
+
+    public void OpenDoor(Vector3 rayOrigin, Vector3 rayDir)
+    {
+        var tile = TileMap.GetFirstTileFromRaycast(rayOrigin, rayDir, 5.5);
+        if (tile is null)
+            return;
+        TileMap.SwapTileCollectionTexture(tile);
+        TileMap.SetCollisionForRegion(tile, alphaAware: true, backfaceCollision: true);
+    }
+
+    public void BuildFloor()
+    {
+        Rect2 floorUv = TileMap.AtlasCoordToUvRect(new Vector2I(9, 2));
+
+        // One floor tile (orientation 0), using the node's current placement settings.
+        TileMap.PlaceTile(GlobalPosition, floorUv, 0);
+
+        // A 4x4 floor centred on the player, keeping tiles that already exist.
+        TileMap.PlaceArea(GlobalPosition, 0, new Vector2I(4, 4), floorUv, anchor: "center", overwrite: false);
+
+        // A box tile (mesh mode 2) on the north wall (orientation 2).
+        var box = new PlacedTileInfo { MeshMode = 2, DepthScale = 0.5 };
+        TileMap.PlaceTile(GlobalPosition, floorUv, 2, box);
+    }
+}
+```
+
+- Orientations and mesh modes are plain `int`s with the same values as in GDScript. See [Orientations](#orientations); mesh modes are `0` flat square, `1` flat triangle, `2` box, `3` prism and `15` AutoShape. `TileMapLayer3D.AnyOrientation` is `-1`.
+- Lookups such as `FindTile` return a new `PlacedTileInfo` filled from the map. Changing it does not change the map: place it again to write it, and call `Copy()` first if you want to keep the original.
+- `GetTileMapData()`, `GetSettings()` and `GetGridSize()` give access to the node's resources.
+- Anything the wrapper doesn't cover is still reachable through the native API: `TileMap.GetRuntimeApi().Call("method_name", ...)`.
+
 ## 15. Key Shortcuts Reference
 
 Shortcuts are active only while a `TileMapLayer3d_Cpp` node is selected and the 3D viewport has focus. They use physical key positions, so they work the same on every keyboard layout, and they never fire while Ctrl, Alt or Meta is held, so Godot's own shortcuts keep working.
@@ -904,11 +974,11 @@ Shortcuts are active only while a `TileMapLayer3d_Cpp` node is selected and the 
 | --- | --- | --- |
 | `W` / `S` / `A` / `D` | Move the 3D cursor forward / backward / left / right, relative to the camera | All modes that use the cursor |
 | `Shift + W` / `Shift + S` | Move the 3D cursor up / down | All modes that use the cursor |
-| `Q` / `E` | Rotate the tile 90° counter-clockwise / clockwise | Manual |
+| `Q` / `E` | Rotate the tile 90° counter-clockwise / clockwise | Manual; Patterns (turns the pattern) |
 | `R` / `Shift + R` | Tilt the tile forward / backward | Manual |
 | `F` | Mirror the texture | Manual |
 | `G` / `Shift + G` | Rotate the texture inside the tile by 90° (disabled while Freeze UV is on) | Manual |
-| `T` | Reset rotation, tilt, mirror and texture rotation | Manual |
+| `T` | Reset rotation, tilt, mirror and texture rotation | Manual; Patterns (resets the turn) |
 | `Z` | Toggle **Additive** selection | Smart Select, Patterns |
 | `Delete` | Delete the selected tiles | Vertex Edit |
 | `Esc` | Cancel the current area selection or sculpt operation | Painting modes, Sculpt |
@@ -1016,7 +1086,7 @@ This has been seen with the Godot 4.6 editor using the Direct3D 12 driver. Switc
 
 - Animation definitions live in the node's `settings` resource and are not imported by the 1.x migration; placed animated tiles are.
 - UV Only painting cannot repaint Smart Fill ramp and stair pieces.
-- Patterns cannot be rotated when stamping.
+- Patterns turn only in 90° steps around the vertical axis.
 - FastMove only jumps to tiles on the plane you are facing.
 - Horizontal Loop selection on walls follows the camera's horizontal, which can look vertical relative to the wall.
 - With **Box/Prism (Depth)** in Sculpt mode, corners line up perfectly from one side of the wall only.
